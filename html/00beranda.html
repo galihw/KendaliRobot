@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kendali Robot dengan Variabel dan Tipe Data</title>
+	<link rel="apple-touch-icon" sizes="180x180" href="../img/favicon_io/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../img/favicon_io/favicon-16x16.png">
+	<style>
+		.bg {
+			max-width: 840px; /* Lebar maksimal halaman */
+			margin: 0 auto;
+			width: 100%;
+			height: 472px;
+			position: absolute;
+			background-color: #222222;
+			background-size: 100%;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.klikbtn {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			outline = none;
+			width: 298px; 
+			height: 36px; 
+			/*background-color: #ff0000;*/
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+	</style>
+</head>
+<body>
+	<div class ="bg" id="bg">
+		<div class="klikbtn" id="tombol1"></div>
+		<div class="klikbtn" id="tombol2"></div>
+		<div class="klikbtn" id="tombol3"></div>
+		<div class="klikbtn" id="tombol4"></div>
+		<div class="klikbtn" id="tombol5"></div>
+	</div>
+	<script>
+		const myBG = document.getElementById('bg');
+		const tombol1 = document.getElementById('tombol1');
+		document.body.style.backgroundColor = "black"; // latar belakang hitam
+		myBG.style.backgroundImage = "url(../img/A00_bg.png)";
+		tombol1.style.backgroundImage = "url(../img/A00_btn1.png)";
+		tombol2.style.backgroundImage = "url(../img/A00_btn2.png)";
+		tombol3.style.backgroundImage = "url(../img/A00_btn3.png)";
+		tombol4.style.backgroundImage = "url(../img/A00_btn4.png)";
+		tombol5.style.backgroundImage = "url(../img/A00_btn5.png)";
+		
+		let lebarJendela = window.innerWidth;
+		let tinggiJendela = window.innerHeight;
+		var scl = 1;
+		myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+		myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+		myBG.style.left = ''+(myBG.x)+'px';
+		myBG.style.top = ''+(myBG.y)+'px';
+		tombol1.style.left = ''+(271.86)+'px';
+		tombol1.style.top = ''+(154.88)+'px';
+		tombol2.style.left = ''+(271.86)+'px';
+		tombol2.style.top = ''+(206.74)+'px';
+		tombol3.style.left = ''+(271.86)+'px';
+		tombol3.style.top = ''+(258.6)+'px';
+		tombol4.style.left = ''+(271.86)+'px';
+		tombol4.style.top = ''+(310.45)+'px';
+		tombol5.style.left = ''+(271.86)+'px';
+		tombol5.style.top = ''+(362.31)+'px';
+		
+		tombol1.addEventListener('click', () => {
+			location.href = "01carapenggunaan.html";
+		});
+		tombol2.addEventListener('click', () => {
+			location.href = "02atp.html";
+		});
+		tombol3.addEventListener('click', () => {
+			location.href = "03materi.html";
+		});
+		tombol4.addEventListener('click', () => {
+			location.href = "041memasangkan.html";
+		});
+		tombol5.addEventListener('click', () => {
+			location.href = "05kreator.html";
+		});
+
+	</script>
+	<script>
+	</script>
+	<script>
+		
+		var fixzoom,fixscale;
+		document.body.style.backgroundColor = "black";
+		window.addEventListener('resize', () => {
+			ZoomAll();
+		});
+
+		function UbahWindow(xc,yc){
+			lebarJendela = window.innerWidth;
+			tinggiJendela = window.innerHeight;
+			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+			myBG.style.left = ''+(myBG.x)+'px';
+			myBG.style.top = ''+(myBG.y)+'px';
+			tombol1.style.left = ''+(271.86)+'px';
+			tombol1.style.top = ''+(154.88)+'px';
+			tombol2.style.left = ''+(271.86)+'px';
+			tombol2.style.top = ''+(206.74)+'px';
+			tombol3.style.left = ''+(271.86)+'px';
+			tombol3.style.top = ''+(258.6)+'px';
+			tombol4.style.left = ''+(271.86)+'px';
+			tombol4.style.top = ''+(310.45)+'px';
+			tombol5.style.left = ''+(271.86)+'px';
+			tombol5.style.top = ''+(362.31)+'px';
+		}
+		function ZoomAll(){
+			let lebarJendela = window.innerWidth;
+			let tinggiJendela = window.innerHeight;
+			var xscale = lebarJendela/840;
+			var yscale = tinggiJendela/472;
+			scl = 0.95*Math.min(xscale,yscale);
+			fixscale = scl;
+			fixzoom = scl*100;
+			document.body.style.zoom = ""+fixzoom+"%";
+			UbahWindow(0,0);
+		}
+		
+		ZoomAll();
+		function handleClick(event) {
+			console.log("handleClick");
+		}
+		myBG.addEventListener('click', handleClick);
+		setTimeout(() => {
+			console.log("handleClick")
+			ZoomAll();
+			myBG.removeEventListener('click', handleClick);
+		}, 100);
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kendali Robot dengan Variabel dan Tipe Data</title>
+	<link rel="apple-touch-icon" sizes="180x180" href="../img/favicon_io/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../img/favicon_io/favicon-16x16.png">
+	<style>
+		.bg {
+			max-width: 840px; /* Lebar maksimal halaman */
+			margin: 0 auto;
+			width: 100%;
+			height: 472px;
+			position: absolute;
+			background-color: #222222;
+			background-size: 100%;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.klikbtn {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			outline = none;
+			width: 131px; 
+			height: 36px; 
+			/*background-color: #ff0000;*/
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.teksXPNilai {
+			position: absolute;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: white;
+			/*background-color: lightblue;*/
+			width: 116.2px; 
+			height: 37.63px;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size:  20px;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.btnA {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			outline = none;
+			width: 247px; 
+			height: 55px; 
+			/*background-color: #ff0000;*/
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.btnB {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			outline = none;
+			width: 237px; 
+			height: 36px; 
+			/*background-color: #ff0000;*/
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.tujuan {
+			position: absolute;
+			cursor: default;
+			touch-action: none;
+			outline = none;
+			width: 248.25px; 
+			height: 116.44px;
+			background-size: 100%;
+			/*background-color: #ff0000;*/
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.teksKet {
+			position: absolute;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: white;
+			/*background-color: lightblue;*/
+			width: 377.28px; 
+			height: 42.45px;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size:  14px;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+	</style>
+</head>
+<body>
+	<div class ="bg" id="bg">
+		<div class="klikbtn" id="tombol"></div>
+		<div class="teksXPNilai" id="NilaiXP">0 XP</div>
+		<div class="teksXPNilai" id="Aktivitas">1/3</div>
+		<div id="kiri">
+			<div class="btnA" id="btnA1"></div>
+			<div class="btnA" id="btnA2"></div>
+			<div class="btnA" id="btnA3"></div>
+			<div class="btnA" id="btnA4"></div>
+		</div>
+		<div id="kanan">
+			<div class="tujuan" id="tujuan1">
+				<div class="btnB" id="isi1" style="top:5.98px; left:73.69px"></div>
+				<div class="btnB" id="kosong1"></div>
+			</div>
+			<div class="tujuan" id="tujuan2">
+				<div class="btnB" id="isi2" style="top:5.98px; left:73.69px"></div>
+				<div class="btnB" id="kosong2"></div>
+			</div>
+			<div class="tujuan" id="tujuan3">
+				<div class="btnB" id="isi3" style="top:5.98px; left:73.69px"></div>
+				<div class="btnB" id="kosong3"></div>
+			</div>
+			<div class="tujuan" id="tujuan4">
+				<div class="btnB" id="isi4" style="top:5.98px; left:73.69px"></div>
+				<div class="btnB" id="kosong4"></div>
+			</div>
+		</div>
+		<div class="teksKet" id="Keterangan">Keterangan : ...</div>
+	</div>
+	<script>
+		function RandomAngkaAtoB(a,b){ 
+			var r = a+Math.ceil(Math.random() * b);
+			return r;
+		}
+		function RandomMyArray(Arr){
+			for (var i=0; i<Arr.length; i++){
+				var r = Math.floor(Math.random() * Arr.length);
+				var a = Arr[i];
+				Arr[i] = Arr[r];
+				Arr[r] = a;
+			}
+			return Arr
+		}
+	</script>
+	<script>
+		const myBG = document.getElementById('bg');
+		const tombol = document.getElementById('tombol');
+		const NilaiXP = document.getElementById('NilaiXP');
+		const Aktivitas = document.getElementById('Aktivitas');
+		const Keterangan = document.getElementById('Keterangan');
+		document.body.style.backgroundColor = "black"; // latar belakang hitam
+		myBG.style.backgroundImage = "url(../img/A1_bg.png)";
+		tombol.style.backgroundImage = "url(../img/A1_lanjut.png)";
+		
+		let lebarJendela = window.innerWidth;
+		let tinggiJendela = window.innerHeight;
+		var scl = 1;
+		myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+		myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+		myBG.style.left = ''+(myBG.x)+'px';
+		myBG.style.top = ''+(myBG.y)+'px';
+		tombol.style.left = ''+(690.89)+'px';
+		tombol.style.top = ''+(410.9)+'px';
+		tombol.style.display = 'none';
+		NilaiXP.style.left = ''+(570)+'px';
+		NilaiXP.style.top = ''+(35)+'px';
+		Aktivitas.style.left = ''+(705)+'px';
+		Aktivitas.style.top = ''+(35)+'px';
+		Keterangan.style.left = ''+(302.29)+'px';
+		Keterangan.style.top = ''+(406.93)+'px';
+		
+		var xybtnA = [[21.02,180.09],[21.02,248.75],[21.02,317.42],[21.02,386.08]];
+		var xytujuanB = [[302.29,147.91],[567.79,147.91],[302.29,281.6],[567.79,281.6]];
+		var xybtnB = [[21.02,180.09],[21.02,248.75],[21.02,317.42],[21.02,386.08]];
+		var isibtnA = [["../img/A1_btn1.png",1],["../img/A1_btn2.png",2],["../img/A1_btn3.png",3],["../img/A1_btn4.png",4]];
+		var isitujuan = [["../img/A1_tujuan1.png","../img/A1_isi1.png",1],["../img/A1_tujuan2.png","../img/A1_isi2.png",2],["../img/A1_tujuan3.png","../img/A1_isi3.png",3],["../img/A1_tujuan4.png","../img/A1_isi4.png",4]];
+		
+		isibtnA = RandomMyArray(isibtnA);
+		isitujuan = RandomMyArray(isitujuan);
+		
+		var noA = 0;
+		var noB = 0;
+		var ct = 0;
+		var itemA = null;
+		for(var i=1;i<=4;i++){
+			document.getElementById('btnA'+i).style.left = xybtnA[i-1][0]+'px';
+			document.getElementById('btnA'+i).style.top = xybtnA[i-1][1]+'px';
+			document.getElementById('btnA'+i).style.backgroundImage = "url("+isibtnA[i-1][0]+")";
+			document.getElementById('tujuan'+i).style.left = xytujuanB[i-1][0]+'px';
+			document.getElementById('tujuan'+i).style.top = xytujuanB[i-1][1]+'px';
+			document.getElementById('tujuan'+i).style.backgroundImage = "url("+isitujuan[i-1][0]+")";
+			document.getElementById('isi'+i).style.left = 5+'px';
+			document.getElementById('isi'+i).style.top = 70+'px';
+			document.getElementById('isi'+i).style.display = 'none';
+			document.getElementById('isi'+i).style.backgroundImage = "url("+isitujuan[i-1][1]+")";
+			document.getElementById('kosong'+i).style.left = 5+'px';
+			document.getElementById('kosong'+i).style.top = 70+'px';
+			document.getElementById('kosong'+i).style.backgroundImage = "url(../img/A1_kosong.png)";
+			document.getElementById('btnA'+i).no = isibtnA[i-1][1];
+			document.getElementById('kosong'+i).no = isitujuan[i-1][2];
+			document.getElementById('kosong'+i).mate = document.getElementById('isi'+i);
+			
+			document.getElementById('btnA'+i).addEventListener('click', (e) => {
+				noA = e.target.no;
+				itemA = e.target;
+					Keterangan.innerHTML = "Pasangkan dengan yang di kanan.";
+			});
+			document.getElementById('kosong'+i).addEventListener('click', (e) => {
+				noB = e.target.no;
+				if(noA==noB){
+					e.target.style.display = "none";
+					e.target.mate.style.cursor = "default";
+					e.target.mate.style.display = '';
+					itemA.style.cursor = "default";
+					itemA.style.filter = "grayscale(100%)";
+					Keterangan.innerHTML = "Keterangan : Benar.";
+					ct++;
+					if(ct==4)	Selesai();
+				}else{
+					Keterangan.innerHTML = "Keterangan : Masih belum tepat.";
+				}
+			});
+		}
+		
+		function Selesai(){
+			Keterangan.innerHTML = "Selamat, anda mendapatkan 50 XP";
+			NilaiXP.innerHTML = "50 XP";
+			tombol.style.display = '';
+		}
+		
+		tombol.addEventListener('click', () => {
+			location.href = "042mengatur.html";
+		});
+
+	</script>
+	<script>
+	</script>
+	<script>
+		
+		var fixzoom,fixscale;
+		document.body.style.backgroundColor = "black";
+		window.addEventListener('resize', () => {
+			ZoomAll();
+		});
+
+		function UbahWindow(xc,yc){
+			lebarJendela = window.innerWidth;
+			tinggiJendela = window.innerHeight;
+			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+			myBG.style.left = ''+(myBG.x)+'px';
+			myBG.style.top = ''+(myBG.y)+'px';
+			tombol.style.left = ''+(690.89)+'px';
+			tombol.style.top = ''+(410.9)+'px';
+			NilaiXP.style.left = ''+(570)+'px';
+			NilaiXP.style.top = ''+(35)+'px';
+			Aktivitas.style.left = ''+(705)+'px';
+			Aktivitas.style.top = ''+(35)+'px';
+			Keterangan.style.left = ''+(302.29)+'px';
+			Keterangan.style.top = ''+(406.93)+'px';
+			for(var i=1;i<=4;i++){
+				document.getElementById('btnA'+i).style.left = xybtnA[i-1][0]+'px';
+				document.getElementById('btnA'+i).style.top = xybtnA[i-1][1]+'px';
+				document.getElementById('tujuan'+i).style.left = xytujuanB[i-1][0]+'px';
+				document.getElementById('tujuan'+i).style.top = xytujuanB[i-1][1]+'px';
+				document.getElementById('isi'+i).style.left = 5+'px';
+				document.getElementById('isi'+i).style.top = 70+'px';
+				document.getElementById('kosong'+i).style.left = 5+'px';
+				document.getElementById('kosong'+i).style.top = 70+'px';
+			}
+		}
+		function ZoomAll(){
+			let lebarJendela = window.innerWidth;
+			let tinggiJendela = window.innerHeight;
+			var xscale = lebarJendela/840;
+			var yscale = tinggiJendela/472;
+			scl = 0.95*Math.min(xscale,yscale);
+			fixscale = scl;
+			fixzoom = scl*100;
+			document.body.style.zoom = ""+fixzoom+"%";
+			UbahWindow(0,0);
+		}
+		
+		ZoomAll();
+		function handleClick(event) {
+			console.log("handleClick");
+		}
+		myBG.addEventListener('click', handleClick);
+		setTimeout(() => {
+			console.log("handleClick")
+			ZoomAll();
+			myBG.removeEventListener('click', handleClick);
+		}, 100);
+		
+	</script>
+</body>
+</html>

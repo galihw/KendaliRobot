@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kendali Robot dengan Variabel dan Tipe Data</title>
+	<link rel="apple-touch-icon" sizes="180x180" href="../img/favicon_io/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../img/favicon_io/favicon-16x16.png">
+	<style>
+		.bg {
+			max-width: 840px; /* Lebar maksimal halaman */
+			margin: 0 auto;
+			width: 100%;
+			height: 472px;
+			position: absolute;
+			background-color: #222222;
+			background-size: 100%;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.klikbtn {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			outline = none;
+			width: 131px; 
+			height: 36px; 
+			/*background-color: #ff0000;*/
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.teksXPNilai {
+			position: absolute;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: white;
+			/*background-color: lightblue;*/
+			width: 116.2px; 
+			height: 37.63px;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size:  20px;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+        .Slider {
+            /*display: inline-block;*/
+			position: absolute;
+            padding: 20px;
+        }
+        input[type=range] {
+			cursor: pointer;
+            width: 233px;
+        }
+        #nilaiSlider {
+            /*font-weight: bold;*/
+            color: #ffffff;
+        }
+		.teksKet {
+			position: absolute;
+			text-align: right;
+			display: flex;
+			justify-content: right;
+			align-items: right;
+			color: white;
+			/*background-color: lightblue;*/
+			width: 84px; 
+			height: 12.5px;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size:  12px;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.klikbtnB {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			outline: none;
+			width: 112px; 
+			height: 19px; 
+			/*background-color: #ff0000;*/
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.inputan {
+			position: absolute;
+			font-size:  12px;
+			width: 220px; 
+			height: 9px;
+		}
+		.glow {
+			position: absolute;
+			width: 112px;
+			height: 19px;
+			outline: none;
+			user-select: none;
+			-webkit-user-select: none;
+			box-shadow: 0 0 20px #00f2fe;
+		}
+		.RobotTembok {
+			position: absolute;
+			cursor: default;
+			touch-action: none;
+			width: 245px; 
+			height: 200px; 
+			/*background-color: #ff0000;*/
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.Robot {
+			position: absolute;
+			cursor: default;
+			touch-action: none;
+			width: 36px; 
+			height: 101px; 
+			/*background-color: #ff0000;*/
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.Tembok {
+			position: absolute;
+			cursor: default;
+			touch-action: none;
+			width: 16px; 
+			height: 135px; 
+			/*background-color: #ff0000;*/
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.Lintasan {
+			position: absolute;
+			cursor: default;
+			touch-action: none;
+			width: 135px; 
+			height: 5px; 
+			background-color: #ff0000;
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.mcTeksHasil {
+			position: absolute;
+			cursor: default;
+			touch-action: none;
+			width: 100px; 
+			height: 200px; 
+			/*background-color: #ff0000;*/
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.teksHasil {
+			position: absolute;
+			text-align: left;
+			display: flex;
+			justify-content: left;
+			align-items: left;
+			color: white;
+			/*background-color: lightblue;*/
+			width: 84px; 
+			height: 12.5px;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size:  12px;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+	</style>
+</head>
+<body>
+	<div class ="bg" id="bg">
+		<div class="klikbtn" id="tombol"></div>
+		<div class="teksXPNilai" id="NilaiXP">50 XP</div>
+		<div class="teksXPNilai" id="Aktivitas">2/3</div>
+		<div class="Slider" id="Slider">
+			<input type="range" id="angkaSlider" min="0" max="100" value="50" oninput="updateNilai(this.value)">
+			<div class="teksKet"id="nilaiSlider" style="left:170px;top:4px">125 cm</div>
+		</div>
+		<div class="klikbtnB" id="btnTrue">
+			<div class="glow" id="btnglowTrue" style="pointer-events: none;left:0px;top:0px;"></div>
+		</div>
+		<div class="klikbtnB" id="btnFalse">
+			<div class="glow" id="btnglowFalse" style="pointer-events: none;left:0px;top:0px;"></div>
+		</div>
+		<div class="teksKet"id="nilaiDeteksi" style="width: 150px;">Deteksi (True)</div>
+		<input class="inputan" id="inputan" type="text" oninput="funcInput(this.value)">
+		<div class="RobotTembok" id="RobotTembok">
+			<div class="Tembok" id="Tembok"></div>
+			<div class="Robot" id="Robot"></div>
+			<div class="Lintasan" id="Lintasan"></div>
+			<div class="teksKet" id="Nama" 
+			style=
+			"background-color:#ffffff;
+			color:#000000;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;"></div>
+		</div>
+		
+		<div class="mcTeksHasil" id="mcTeksHasil">
+			<div class="teksHasil" id="teksHasil1"></div>
+			<div class="teksHasil" id="teksHasil2"></div>
+			<div class="teksHasil" id="teksHasil3"></div>
+		</div>
+	</div>
+	<script>
+		function StringDesimal(ff){
+			var strff = ""+ff;
+			const gg = strff.split(".");
+			if(gg.length==2)	return gg[0]+","+gg[1];
+			else 				return ff
+		}
+	</script>
+	<script>
+		const myBG = document.getElementById('bg');
+		const tombol = document.getElementById('tombol');
+		const NilaiXP = document.getElementById('NilaiXP');
+		const Aktivitas = document.getElementById('Aktivitas');
+		const Slider = document.getElementById('Slider');
+		const btnTrue = document.getElementById('btnTrue');
+		const btnFalse = document.getElementById('btnFalse');
+		const btnglowTrue = document.getElementById('btnglowTrue');
+		const btnglowFalse = document.getElementById('btnglowFalse');
+		const nilaiDeteksi = document.getElementById('nilaiDeteksi');
+		const inputan = document.getElementById('inputan');
+		const Robot = document.getElementById('Robot');
+		const Tembok = document.getElementById('Tembok');
+		const RobotTembok = document.getElementById('RobotTembok');
+		const Lintasan = document.getElementById('Lintasan');
+		const Nama = document.getElementById('Nama');
+		
+		const mcTeksHasil = document.getElementById('mcTeksHasil');
+		const teksHasil1 = document.getElementById('teksHasil1');
+		const teksHasil2 = document.getElementById('teksHasil2');
+		const teksHasil3 = document.getElementById('teksHasil3');
+		
+		
+		
+		document.body.style.backgroundColor = "black"; // latar belakang hitam
+		myBG.style.backgroundImage = "url(../img/A2_bg.png)";
+		tombol.style.backgroundImage = "url(../img/A2_lanjut.png)";
+		btnTrue.style.backgroundImage = "url(../img/A2_btn1True.png)";
+		btnFalse.style.backgroundImage = "url(../img/A2_btn2False.png)";
+		btnglowTrue.style.backgroundImage = "url(../img/A2_btnGlow.png)";
+		btnglowFalse.style.backgroundImage = "url(../img/A2_btnGlow.png)";
+		Robot.style.backgroundImage = "url(../img/A2_robot.png)";
+		Tembok.style.backgroundImage = "url(../img/A2_tembok.png)";
+		
+		let lebarJendela = window.innerWidth;
+		let tinggiJendela = window.innerHeight;
+		var scl = 1;
+		myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+		myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+		myBG.style.left = ''+(myBG.x)+'px';
+		myBG.style.top = ''+(myBG.y)+'px';
+		tombol.style.left = ''+(690.89)+'px';
+		tombol.style.top = ''+(410.9)+'px';
+		tombol.style.display = 'none';
+		NilaiXP.style.left = ''+(570)+'px';
+		NilaiXP.style.top = ''+(35)+'px';
+		Aktivitas.style.left = ''+(705)+'px';
+		Aktivitas.style.top = ''+(35)+'px';
+		Slider.style.left = ''+(5)+'px';
+		Slider.style.top = ''+(218)+'px';
+		btnTrue.style.left = ''+(29.17)+'px';
+		btnTrue.style.top = ''+(319.16)+'px';
+		btnFalse.style.left = ''+(148.17)+'px';
+		btnFalse.style.top = ''+(319.16)+'px'
+		nilaiDeteksi.style.left = ''+(108.17)+'px';
+		nilaiDeteksi.style.top = ''+(299.16)+'px';
+		inputan.style.left = ''+(30)+'px';
+		inputan.style.top = ''+(400)+'px';
+		
+		var xrobot = 30;
+		var xwid = 35;
+		var xnilai = 50;
+		inputan.value = "Avi-Tron_26";
+		Nama.innerHTML = "Avi-Tron_26";
+		Robot.style.left = ''+(xrobot)+'px';
+		Robot.style.top = ''+(50+34)+'px';
+		Tembok.style.left = ''+(170+30)+'px';
+		Tembok.style.top = ''+(50)+'px';
+		RobotTembok.style.left = ''+(310)+'px';
+		RobotTembok.style.top = ''+(230)+'px';
+		Lintasan.style.left = ''+(xrobot+35)+'px';
+		Lintasan.style.top = ''+(97)+'px';
+		Nama.style.left = ''+(xrobot-24)+'px';
+		Nama.style.top = ''+(65)+'px';
+		
+		mcTeksHasil.style.left = ''+(660)+'px';
+		mcTeksHasil.style.top = ''+(193)+'px';
+		teksHasil1.style.left = ''+(0)+'px';
+		teksHasil1.style.top = ''+(0)+'px';
+		teksHasil2.style.left = ''+(0)+'px';
+		teksHasil2.style.top = ''+(87)+'px';
+		teksHasil3.style.left = ''+(0)+'px';
+		teksHasil3.style.top = ''+(174)+'px';
+		
+		teksHasil1.innerHTML = "125";
+		teksHasil2.innerHTML = "True";
+		teksHasil3.innerHTML = "Avi-Tron_26";
+		
+		btnglowTrue.style.display = '';
+		btnglowFalse.style.display = 'none';
+		
+		var x0pixel = 30; // sama seperti robot x
+		var dxpixel = 135;
+		var dxprint = 250;
+		var cekTrue = [0,0,0];
+		
+		var swapTF = true;
+		btnTrue.addEventListener('click', () => {
+			swapTF = true;
+			glow();
+		});
+		btnFalse.addEventListener('click', () => {
+			swapTF = false;
+			glow();
+		});
+		function glow(){
+			btnglowTrue.style.display = 'none';
+			btnglowFalse.style.display = 'none';
+			if(swapTF){
+				teksHasil2.innerHTML = "True";
+				Lintasan.style.display = '';
+				btnglowTrue.style.display = '';
+				nilaiDeteksi.innerHTML = "Deteksi (True)";
+			}else{
+				teksHasil2.innerHTML = "False";
+				Lintasan.style.display = 'none';
+				btnglowFalse.style.display = '';
+				nilaiDeteksi.innerHTML = "Tidak Deteksi (False)";
+			}
+			cekTrue[1]++;
+			Selesai();
+		}
+		
+		function funcInput(val){
+			//console.log(val);
+			Nama.innerHTML = val;
+			teksHasil3.innerHTML = '"'+val+'"';
+			cekTrue[2]++;
+			Selesai();
+		}
+		function Selesai(){
+			const total = cekTrue[0]+cekTrue[1]+cekTrue[2];
+			console.log(cekTrue[0]+" - "+cekTrue[1]+" - "+cekTrue[2]);
+			if(cekTrue[0]>2 && cekTrue[1]>2 && cekTrue[2]>2){
+				NilaiXP.innerHTML = "100 XP";
+				tombol.style.display = '';
+			}
+		}
+		
+		tombol.addEventListener('click', () => {
+			location.href = "043pecahkan.html";
+		});
+		
+        // Fungsi untuk mengubah teks angka saat slider digeser
+        function updateNilai(nilai) {
+			cekTrue[0]++;
+            proRobot(nilai);
+			Selesai();
+        }
+		function proRobot(nilai){
+            var nilpixel = nilai/100 * dxpixel;
+            var nilpixelsisa = (100-nilai)/100 * dxpixel;
+			xwid = nilpixel
+			xrobot = x0pixel+nilpixelsisa
+			Robot.style.left = ''+(xrobot)+'px';
+			Lintasan.style.left = ''+(xrobot+35)+'px';
+			Lintasan.style.width = ''+(xwid)+'px';
+			Nama.style.left = ''+(xrobot-24)+'px';
+            //var nilprint = StringDesimal(nilai/100 * dxprint)+' cm';
+			//teksHasil1.innerHTML = StringDesimal(nilai/100 * dxprint);
+            var nilprint = (nilai/100 * dxprint)+' cm';
+			teksHasil1.innerHTML = (nilai/100 * dxprint);
+            document.getElementById('nilaiSlider').innerHTML = nilprint;
+		}
+		proRobot(xnilai);
+	</script>
+	<script>
+		
+		var fixzoom,fixscale;
+		document.body.style.backgroundColor = "black";
+		window.addEventListener('resize', () => {
+			ZoomAll();
+		});
+
+		function UbahWindow(xc,yc){
+			lebarJendela = window.innerWidth;
+			tinggiJendela = window.innerHeight;
+			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+			myBG.style.left = ''+(myBG.x)+'px';
+			myBG.style.top = ''+(myBG.y)+'px';
+			myBG.style.left = ''+(myBG.x)+'px';
+			myBG.style.top = ''+(myBG.y)+'px';
+			tombol.style.left = ''+(690.89)+'px';
+			tombol.style.top = ''+(410.9)+'px';
+			NilaiXP.style.left = ''+(570)+'px';
+			NilaiXP.style.top = ''+(35)+'px';
+			Aktivitas.style.left = ''+(705)+'px';
+			Aktivitas.style.top = ''+(35)+'px';
+			Slider.style.left = ''+(5)+'px';
+			Slider.style.top = ''+(218)+'px';
+			btnTrue.style.left = ''+(29.17)+'px';
+			btnTrue.style.top = ''+(319.16)+'px';
+			btnFalse.style.left = ''+(148.17)+'px';
+			btnFalse.style.top = ''+(319.16)+'px'
+			nilaiDeteksi.style.left = ''+(108.17)+'px';
+			nilaiDeteksi.style.top = ''+(299.16)+'px';
+			inputan.style.left = ''+(30)+'px';
+			inputan.style.top = ''+(400)+'px';
+			Robot.style.left = ''+(xrobot)+'px';
+			Robot.style.top = ''+(50+34)+'px';
+			Tembok.style.left = ''+(170+30)+'px';
+			Tembok.style.top = ''+(50)+'px';
+			RobotTembok.style.left = ''+(310)+'px';
+			RobotTembok.style.top = ''+(230)+'px';
+			Lintasan.style.left = ''+(xrobot+35)+'px';
+			Lintasan.style.top = ''+(97)+'px';
+			Nama.style.left = ''+(xrobot-24)+'px';
+			Nama.style.top = ''+(65)+'px';
+		}
+		function ZoomAll(){
+			let lebarJendela = window.innerWidth;
+			let tinggiJendela = window.innerHeight;
+			var xscale = lebarJendela/840;
+			var yscale = tinggiJendela/472;
+			scl = 0.95*Math.min(xscale,yscale);
+			fixscale = scl;
+			fixzoom = scl*100;
+			document.body.style.zoom = ""+fixzoom+"%";
+			UbahWindow(0,0);
+		}
+		
+		ZoomAll();
+		function handleClick(event) {
+			console.log("handleClick");
+		}
+		myBG.addEventListener('click', handleClick);
+		setTimeout(() => {
+			console.log("handleClick")
+			ZoomAll();
+			myBG.removeEventListener('click', handleClick);
+		}, 100);
+		
+	</script>
+</body>
+</html>

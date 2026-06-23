@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kendali Robot dengan Variabel dan Tipe Data</title>
+	<link rel="apple-touch-icon" sizes="180x180" href="../img/favicon_io/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../img/favicon_io/favicon-16x16.png">
+	<style>
+		.bg {
+			max-width: 840px; /* Lebar maksimal halaman */
+			margin: 0 auto;
+			width: 100%;
+			height: 472px;
+			position: absolute;
+			background-color: #222222;
+			background-size: 100%;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.klikbtn {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			outline = none;
+			width: 131px; 
+			height: 36px; 
+			/*background-color: #ff0000;*/
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.teksXPNilai {
+			position: absolute;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: white;
+			/*background-color: lightblue;*/
+			width: 116.2px; 
+			height: 37.63px;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size:  20px;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.btnUji {
+			position: absolute;
+			cursor: pointer;
+			touch-action: none;
+			outline = none;
+			width: 298px; 
+			height: 36px; 
+			/*background-color: #ff0000;*/
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.RobotTembok {
+			position: absolute;
+			cursor: default;
+			touch-action: none;
+			width: 245px; 
+			height: 200px; 
+			/*background-color: #ff0000;*/
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.Robot {
+			position: absolute;
+			cursor: default;
+			touch-action: none;
+			width: 35px; 
+			height: 100px; 
+			/*background-color: #ff0000;*/
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.Tembok {
+			position: absolute;
+			cursor: default;
+			touch-action: none;
+			width: 30px; 
+			height: 135px; 
+			/*background-color: #ff0000;*/
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.Silang {
+			position: absolute;
+			cursor: default;
+			touch-action: none;
+			width: 136px;
+			height: 136px;
+			/*background-color: #ff0000;*/
+			/*opacity : 0.5;*/
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.Nama {
+			background-color:#ffffff;
+			color:#000000;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		
+			position: absolute;
+			width: 84px; 
+			height: 12.5px;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size:  12px;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		.custom-select {
+			position: absolute;
+			/*position: relative;*/
+			font-family: Arial, sans-serif;
+			width: 130px;
+		}
+
+		.custom-select select {
+			width: 100%;
+			padding: 0px 0px;
+			background-color: #f1f1f1;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 12px;
+			outline: none;
+		}
+
+		/* Efek saat menu diklik/hover */
+		.custom-select select:hover {
+			background-color: #e2e2e2;
+		}
+		
+		.Keterangan {
+			/*background-color:#ffffff;*/
+			color:#ffffff;
+			text-align: left;
+			display: flex;
+			justify-content: left;
+			align-items: left;
+		
+			position: absolute;
+			width: 300px; 
+			height: 25px;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size:  12px;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+	</style>
+</head>
+<body>
+	<div class ="bg" id="bg">
+		<div class="klikbtn" id="tombol"></div>
+		<div class="klikbtn" id="btnulang"></div>
+		<div class="teksXPNilai" id="NilaiXP">100 XP</div>
+		<div class="teksXPNilai" id="Aktivitas">3/3</div>
+		<div class="btnUji" id="btnUji"></div>
+		
+		
+		<div class="custom-select" id="pilihan1">
+			<select name="pilihan1" id="pil1">
+				<option value="0">-- Pilih Tipe & Nilai --</option>
+				<option value="1">100 (Integer)</option>
+				<option value="2">"Maju" (String)</option>
+				<option value="3">true (Boolean)</option>
+			</select>
+		</div>
+		
+		<div class="custom-select" id="pilihan2">
+			<select name="pilihan2" id="pil2">
+				<option value="0">-- Pilih Tipe & Nilai --</option>
+				<option value="1">"20 cm" (String)</option>
+				<option value="2">false (Boolean)</option>
+				<option value="3">25.5 (Float)</option>
+			</select>
+		</div>
+		
+		<div class="custom-select" id="pilihan3">
+			<select name="pilihan3" id="pil3">
+				<option value="0">-- Pilih Tipe & Nilai --</option>
+				<option value="1">"Aktif" (String)</option>
+				<option value="2">true (Boolean)</option>
+				<option value="3">1 (Integer)</option>
+			</select>
+		</div>
+		
+		<div class="RobotTembok" id="RobotTembok">
+			<div class="Tembok" id="Tembok"></div>
+			<div class="Robot" id="Robot"></div>
+			<div class="Nama" id="Nama"></div>
+			<div class="Silang" id="Silang"></div>
+		</div>
+		
+		<div class="Keterangan" id="Keterangan">Keterangan ...</div>
+	</div>
+	<script>
+		const myBG = document.getElementById('bg');
+		const tombol = document.getElementById('tombol');
+		const NilaiXP = document.getElementById('NilaiXP');
+		const Aktivitas = document.getElementById('Aktivitas');
+		const btnUji = document.getElementById('btnUji');
+		const btnulang = document.getElementById('btnulang');
+		const pilihan1 = document.getElementById('pilihan1');
+		const pilihan2 = document.getElementById('pilihan2');
+		const pilihan3 = document.getElementById('pilihan3');
+		const pil1 = document.getElementById('pil1');
+		const pil2 = document.getElementById('pil2');
+		const pil3 = document.getElementById('pil3');
+		const Robot = document.getElementById('Robot');
+		const Tembok = document.getElementById('Tembok');
+		const RobotTembok = document.getElementById('RobotTembok');
+		const Nama = document.getElementById('Nama');
+		const Keterangan = document.getElementById('Keterangan');
+		document.body.style.backgroundColor = "black"; // latar belakang hitam
+		myBG.style.backgroundImage = "url(../img/A3_bg.png)";
+		tombol.style.backgroundImage = "url(../img/A0_lanjut.png)";
+		btnulang.style.backgroundImage = "url(../img/A3_btnulang.png)";
+		btnUji.style.backgroundImage = "url(../img/A3_btnuji.png)";
+		Robot.style.backgroundImage = "url(../img/A3_robot.png)";
+		Tembok.style.backgroundImage = "url(../img/A3_tembok.png)";
+		Silang.style.backgroundImage = "url(../img/A3_silang.png)";
+		Silang.style.display = 'none';//
+		
+		let lebarJendela = window.innerWidth;
+		let tinggiJendela = window.innerHeight;
+		var scl = 1;
+		myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+		myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+		myBG.style.left = ''+(myBG.x)+'px';
+		myBG.style.top = ''+(myBG.y)+'px';
+		tombol.style.left = ''+(690.89)+'px';
+		tombol.style.top = ''+(410.9)+'px';
+		NilaiXP.style.left = ''+(570)+'px';
+		NilaiXP.style.top = ''+(35)+'px';
+		Aktivitas.style.left = ''+(705)+'px';
+		Aktivitas.style.top = ''+(35)+'px';
+		btnulang.style.left = ''+(690.89)+'px';
+		btnulang.style.top = ''+(372.85)+'px';
+		btnUji.style.left = ''+(26.86)+'px';
+		btnUji.style.top = ''+(410.9)+'px';
+		tombol.style.display = 'none';//
+		btnulang.style.display = 'none';//
+		btnUji.style.display = '';//none
+		//btnUji.style.filter = "grayscale(100%)";
+		//btnUji.style.cursor = "default";
+		//xy button pilih
+		pilihan1.style.left = ''+(150)+'px';
+		pilihan1.style.top = ''+(144)+'px';
+		pilihan2.style.left = ''+(179)+'px';
+		pilihan2.style.top = ''+(230)+'px';
+		pilihan3.style.left = ''+(186)+'px';
+		pilihan3.style.top = ''+(315)+'px';
+		//robot
+		xrobot = 100;
+		Robot.style.left = ''+(xrobot)+'px';
+		Robot.style.top = ''+(50+34)+'px';
+		Tembok.style.left = ''+(xrobot+350)+'px';
+		Tembok.style.top = ''+(50)+'px';
+		RobotTembok.style.left = ''+(310)+'px';
+		RobotTembok.style.top = ''+(120)+'px';
+		Silang.style.left = ''+(350)+'px';
+		Silang.style.top = ''+(50)+'px';
+		Nama.style.left = ''+(xrobot-21)+'px';
+		Nama.style.top = ''+(190)+'px';
+		Nama.innerHTML = "AviTron";
+		//Keterangan
+		Keterangan.style.left = ''+(372)+'px';
+		Keterangan.style.top = ''+(395)+'px';
+		
+		//function Selesai(){
+		//	tombol.style.display = '';
+		//}
+		
+		function moveBenar() {
+			xrobot += 5; // Geser 5 piksel;
+			xrobot = Math.min (xrobot,400);
+			Robot.style.left = xrobot + 'px';
+			Nama.style.left = ''+(xrobot-21)+'px'
+			var ff = xrobot==400;
+			if (!ff) {
+				requestAnimationFrame(moveBenar); 
+			}else{
+				Keterangan.style.color = "#6796F7";
+				Keterangan.innerHTML = '🎉 SUKSES: Variabel "batas_jarak_stop" terdeteksi desimal (25.5 Float) ';
+				Keterangan.innerHTML += '& sistem rem darurat (true Boolean) aktif! ';
+				Keterangan.innerHTML += 'Robot berhenti aman pada jarak 25.5 cm dari dinding rintangan. ';
+				Keterangan.innerHTML += 'Misi berhasil!';
+				btnUji.style.pointer = "none";
+				tombol.style.display = "";
+				NilaiXP.innerHTML = "150 XP";
+			}
+		}
+		function moveSalah() {
+			xrobot += 5; // Geser 5 piksel
+			xrobot = Math.min (xrobot,430);
+			Robot.style.left = xrobot + 'px';
+			Nama.style.left = ''+(xrobot-21)+'px';
+			var ff = xrobot==430;
+			if (!ff) {
+				requestAnimationFrame(moveSalah); 
+			}else{
+				console.log("benar");
+				const nilai1 = pil1.value;
+				const teks1 = pil1.options[pil1.selectedIndex].text;
+				const nilai2 = pil2.value;
+				const teks2 = pil2.options[pil2.selectedIndex].text;
+				const nilai3 = pil3.value;
+				const teks3 = pil3.options[pil3.selectedIndex].text;
+				
+				var stra = 'Karena "mode_jalan" terdeteksi bukan "Maju". ';
+				if(nilai1 == 2)	stra = " ";
+				var strb = 'Variabel "batas_jarak_stop" terdeteksi bukan 25.5. ';
+				if(nilai2 == 3)	strb = " ";
+				var strc = 'Variabel "rem_otomatis_aktif" terdeteksi bukan true. ';
+				if(nilai3 == 2)	strb = ' ';
+				
+				Keterangan.style.color = "#FF69B4";
+				Keterangan.innerHTML = 'Gagal: ';
+				Keterangan.innerHTML += stra;
+				Keterangan.innerHTML += strb;
+				Keterangan.innerHTML += strc;
+				btnulang.style.display = "";
+				Silang.style.display = '';
+			}
+		}
+	</script>
+	<script>
+		tombol.addEventListener('click', () => {
+			location.href = "044kesimpulan.html";
+		});
+		btnulang.addEventListener('click', () => {
+			location.href = "043pecahkan.html";
+		});
+		btnUji.addEventListener('click', () => {
+			const nilai1 = pil1.value;
+			const nilai2 = pil2.value;
+			const nilai3 = pil3.value;
+			if(nilai1 == 2 && nilai2 == 3 && nilai3 == 2){
+				// kalau benar
+				requestAnimationFrame(moveBenar);
+			}else{
+				requestAnimationFrame(moveSalah);
+			}
+			btnUji.style.filter = 'grayscale(100%)';
+			pil1.disabled = true;
+			pil2.disabled = true;
+			pil3.disabled = true;
+		});
+
+	</script>
+	<script>
+		
+		var fixzoom,fixscale;
+		document.body.style.backgroundColor = "black";
+		window.addEventListener('resize', () => {
+			ZoomAll();
+		});
+
+		function UbahWindow(xc,yc){
+			lebarJendela = window.innerWidth;
+			tinggiJendela = window.innerHeight;
+			myBG.x = window.scrollX+(lebarJendela-840*scl)/2;
+			myBG.y = window.scrollY+(tinggiJendela-472*scl)/2;
+			myBG.style.left = ''+(myBG.x)+'px';
+			myBG.style.top = ''+(myBG.y)+'px';
+			tombol.style.left = ''+(690.89)+'px';
+			tombol.style.top = ''+(410.9)+'px';
+			NilaiXP.style.left = ''+(570)+'px';
+			NilaiXP.style.top = ''+(35)+'px';
+			Aktivitas.style.left = ''+(705)+'px';
+			Aktivitas.style.top = ''+(35)+'px';
+			btnulang.style.left = ''+(690.89)+'px';
+			btnulang.style.top = ''+(372.85)+'px';
+			btnUji.style.left = ''+(26.86)+'px';
+			btnUji.style.top = ''+(410.9)+'px';
+			pilihan1.style.left = ''+(150)+'px';
+			pilihan1.style.top = ''+(144)+'px';
+			pilihan2.style.left = ''+(179)+'px';
+			pilihan2.style.top = ''+(230)+'px';
+			pilihan3.style.left = ''+(186)+'px';
+			pilihan3.style.top = ''+(315)+'px';
+			Robot.style.left = ''+(xrobot)+'px';
+			Robot.style.top = ''+(50+34)+'px';
+			Tembok.style.left = ''+(xrobot+350)+'px';
+			Tembok.style.top = ''+(50)+'px';
+			RobotTembok.style.left = ''+(310)+'px';
+			RobotTembok.style.top = ''+(120)+'px';
+			Silang.style.left = ''+(350)+'px';
+			Silang.style.top = ''+(50)+'px';
+			Nama.style.left = ''+(xrobot-21)+'px';
+			Nama.style.top = ''+(190)+'px';
+			Keterangan.style.left = ''+(372)+'px';
+			Keterangan.style.top = ''+(395)+'px';
+		}
+		function ZoomAll(){
+			let lebarJendela = window.innerWidth;
+			let tinggiJendela = window.innerHeight;
+			var xscale = lebarJendela/840;
+			var yscale = tinggiJendela/472;
+			scl = 0.95*Math.min(xscale,yscale);
+			fixscale = scl;
+			fixzoom = scl*100;
+			document.body.style.zoom = ""+fixzoom+"%";
+			UbahWindow(0,0);
+		}
+		
+		ZoomAll();
+		function handleClick(event) {
+			console.log("handleClick");
+		}
+		myBG.addEventListener('click', handleClick);
+		setTimeout(() => {
+			console.log("handleClick")
+			ZoomAll();
+			myBG.removeEventListener('click', handleClick);
+		}, 100);
+		
+	</script>
+</body>
+</html>
