@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kendali Robot dengan Variabel dan Tipe Data</title>
 	<link rel="apple-touch-icon" sizes="180x180" href="../img/favicon_io/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
@@ -24,8 +24,8 @@
 			cursor: pointer;
 			touch-action: none;
 			outline = none;
-			width: 131px; 
-			height: 36px; 
+			width: 130px; 
+			height: 35px; 
 			/*background-color: #ff0000;*/
 			/*opacity : 0.5;*/
 			user-select: none;
@@ -276,7 +276,7 @@
 		Nama.innerHTML = "AviTron";
 		//Keterangan
 		Keterangan.style.left = ''+(372)+'px';
-		Keterangan.style.top = ''+(395)+'px';
+		Keterangan.style.top = ''+(391)+'px';
 		
 		//function Selesai(){
 		//	tombol.style.display = '';
@@ -291,7 +291,7 @@
 			if (!ff) {
 				requestAnimationFrame(moveBenar); 
 			}else{
-				Keterangan.style.color = "#6796F7";
+				Keterangan.style.color = "#0000FF";
 				Keterangan.innerHTML = '🎉 SUKSES: Variabel "batas_jarak_stop" terdeteksi desimal (25.5 Float) ';
 				Keterangan.innerHTML += '& sistem rem darurat (true Boolean) aktif! ';
 				Keterangan.innerHTML += 'Robot berhenti aman pada jarak 25.5 cm dari dinding rintangan. ';
@@ -325,7 +325,7 @@
 				var strc = 'Variabel "rem_otomatis_aktif" terdeteksi bukan true. ';
 				if(nilai3 == 2)	strb = ' ';
 				
-				Keterangan.style.color = "#FF69B4";
+				Keterangan.style.color = "#FF0000";
 				Keterangan.innerHTML = 'Gagal: ';
 				Keterangan.innerHTML += stra;
 				Keterangan.innerHTML += strb;
@@ -401,7 +401,7 @@
 			Nama.style.left = ''+(xrobot-21)+'px';
 			Nama.style.top = ''+(190)+'px';
 			Keterangan.style.left = ''+(372)+'px';
-			Keterangan.style.top = ''+(395)+'px';
+			Keterangan.style.top = ''+(391)+'px';
 		}
 		function ZoomAll(){
 			let lebarJendela = window.innerWidth;

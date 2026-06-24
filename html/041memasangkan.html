@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kendali Robot dengan Variabel dan Tipe Data</title>
 	<link rel="apple-touch-icon" sizes="180x180" href="../img/favicon_io/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
@@ -24,8 +24,8 @@
 			cursor: pointer;
 			touch-action: none;
 			outline = none;
-			width: 131px; 
-			height: 36px; 
+			width: 130px; 
+			height: 35px; 
 			/*background-color: #ff0000;*/
 			/*opacity : 0.5;*/
 			user-select: none;
@@ -89,7 +89,7 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			color: white;
+			color: black;
 			/*background-color: lightblue;*/
 			width: 377.28px; 
 			height: 42.45px;
@@ -97,6 +97,15 @@
 			font-size:  14px;
 			user-select: none;
 			-webkit-user-select: none;
+		}
+		.glow {
+			position: absolute;
+			width: 247px;
+			height: 55px;
+			outline: none;
+			user-select: none;
+			-webkit-user-select: none;
+			box-shadow: 0 0 20px #00f2fe;
 		}
 	</style>
 </head>
@@ -106,10 +115,18 @@
 		<div class="teksXPNilai" id="NilaiXP">0 XP</div>
 		<div class="teksXPNilai" id="Aktivitas">1/3</div>
 		<div id="kiri">
-			<div class="btnA" id="btnA1"></div>
-			<div class="btnA" id="btnA2"></div>
-			<div class="btnA" id="btnA3"></div>
-			<div class="btnA" id="btnA4"></div>
+			<div class="btnA" id="btnA1">
+				<div class="glow" id="glow1" style="pointer-events: none;left:0px;top:0px;"></div>
+			</div>
+			<div class="btnA" id="btnA2">
+				<div class="glow" id="glow2" style="pointer-events: none;left:0px;top:0px;"></div>
+			</div>
+			<div class="btnA" id="btnA3">
+				<div class="glow" id="glow3" style="pointer-events: none;left:0px;top:0px;"></div>
+			</div>
+			<div class="btnA" id="btnA4">
+				<div class="glow" id="glow4" style="pointer-events: none;left:0px;top:0px;"></div>
+			</div>
 		</div>
 		<div id="kanan">
 			<div class="tujuan" id="tujuan1">
@@ -182,6 +199,34 @@
 		isibtnA = RandomMyArray(isibtnA);
 		isitujuan = RandomMyArray(isitujuan);
 		
+			function KlikA(e){
+				noA = e.target.no;
+				itemA = e.target;
+				Keterangan.innerHTML = "Pasangkan dengan yang di kanan.";
+				for(var i=1;i<=4;i++){
+					document.getElementById('glow'+i).style.display = 'none';
+				}
+				itemA.glow.style.display = '';
+			}
+			function KlikB(e){
+				noB = e.target.no;
+				if(noA==noB){
+					e.target.style.display = "none";
+					e.target.mate.style.cursor = "default";
+					e.target.mate.style.display = '';
+					itemA.style.cursor = "default";
+					itemA.style.filter = "grayscale(100%)";
+					Keterangan.innerHTML = "Keterangan : Benar.";
+					ct++;
+					if(ct==4)	Selesai();
+					itemA.glow.style.display = 'none';
+					itemA.removeEventListener('click', KlikA);
+					e.target.removeEventListener('click', KlikB);
+				}else{
+					Keterangan.innerHTML = "Keterangan : Masih belum tepat.";
+				}
+			}
+			
 		var noA = 0;
 		var noB = 0;
 		var ct = 0;
@@ -203,27 +248,11 @@
 			document.getElementById('btnA'+i).no = isibtnA[i-1][1];
 			document.getElementById('kosong'+i).no = isitujuan[i-1][2];
 			document.getElementById('kosong'+i).mate = document.getElementById('isi'+i);
+			document.getElementById('glow'+i).style.display = 'none';
+			document.getElementById('btnA'+i).glow = document.getElementById('glow'+i);
 			
-			document.getElementById('btnA'+i).addEventListener('click', (e) => {
-				noA = e.target.no;
-				itemA = e.target;
-					Keterangan.innerHTML = "Pasangkan dengan yang di kanan.";
-			});
-			document.getElementById('kosong'+i).addEventListener('click', (e) => {
-				noB = e.target.no;
-				if(noA==noB){
-					e.target.style.display = "none";
-					e.target.mate.style.cursor = "default";
-					e.target.mate.style.display = '';
-					itemA.style.cursor = "default";
-					itemA.style.filter = "grayscale(100%)";
-					Keterangan.innerHTML = "Keterangan : Benar.";
-					ct++;
-					if(ct==4)	Selesai();
-				}else{
-					Keterangan.innerHTML = "Keterangan : Masih belum tepat.";
-				}
-			});
+			document.getElementById('btnA'+i).addEventListener('click', KlikA);
+			document.getElementById('kosong'+i).addEventListener('click', KlikB);
 		}
 		
 		function Selesai(){
